@@ -42,6 +42,13 @@ const addProduct = catchError(async (req, res, next) => {
 });
 
 const getAllProduct = catchError(async (req, res, next) => {
+    if (req.query.categoryId) {
+        req.query.categoryId = parseInt(req.query.categoryId, 10);
+    }
+    if (req.query.subCategoryId) {
+        req.query.subCategoryId = parseInt(req.query.subCategoryId, 10);
+    }
+
     let apiFeatures = new ApiFeatures(prisma.product, { ...req.query })
         .filter()
         .sort()
