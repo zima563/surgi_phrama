@@ -61,8 +61,9 @@ const getSubCategory = catchError(async (req, res, next) => {
 const updateSubCategory = catchError(async (req, res, next) => {
     let { id } = req.params;
     id = parseInt(id, 10)
+    req.body.parentId = parseInt(req.body.parentId);
     let subCategory = await prisma.subCategory.update({
-        where: { id },
+        where: { parentId: id },
         data: req.body
     });
     res.json(subCategory)
