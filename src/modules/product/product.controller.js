@@ -31,8 +31,6 @@ const addProduct = catchError(async (req, res, next) => {
 
         // Resize and save the image
         await sharp(req.file.buffer)
-            .resize(800)
-            .jpeg({ quality: 90 })
             .toFile(imagePath);
 
         newDocumentData.image = resizedFilename; // Assign to the data object
@@ -121,8 +119,6 @@ const updateProduct = catchError(async (req, res, next) => {
             const imagePath = path.join('uploads/', resizedFilename);
 
             await sharp(req.file.buffer)
-                .resize(800)
-                .jpeg({ quality: 90 })
                 .toFile(imagePath);
 
             // Delete the old image if it exists
